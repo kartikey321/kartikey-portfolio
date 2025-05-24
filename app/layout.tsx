@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Kartikey Mahawar - Flutter Developer Portfolio",
   description:
     "Portfolio of Kartikey Mahawar, a fullstack Flutter developer with expertise in mobile and web development",
+    generator: 'v0.dev'
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
