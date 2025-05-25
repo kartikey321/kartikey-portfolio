@@ -193,41 +193,49 @@ export function Projects() {
             filteredProjects.map((project, index) => (
               <Card
                 key={index}
-                className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full"
               >
                 <div className="relative h-48 w-full">
                   <Image src={project.image || "/placeholder.svg"} alt={project.title} fill className="object-cover" />
                 </div>
-                <CardHeader>
+                <CardHeader className="flex-shrink-0">
                   <CardTitle className="text-xl">{project.title}</CardTitle>
-                  <CardDescription>{project.description}</CardDescription>
+                  <CardDescription className="line-clamp-3">{project.description}</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <Badge
-                        key={techIndex}
-                        variant={selectedTags.includes(tech) ? "default" : "outline"}
-                        className="text-xs cursor-pointer transition-colors"
-                        onClick={() => handleTagToggle(tech)}
+                <CardContent className="flex flex-col flex-grow">
+                  <div className="flex-grow"></div>
+                  <div className="mt-auto space-y-4">
+                    <div className="flex flex-wrap gap-2">
+                      {project.technologies.map((tech, techIndex) => (
+                        <Badge
+                          key={techIndex}
+                          variant={selectedTags.includes(tech) ? "default" : "outline"}
+                          className="text-xs cursor-pointer transition-colors"
+                          onClick={() => handleTagToggle(tech)}
+                        >
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="transition-all duration-300 hover:scale-105"
+                        asChild
                       >
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="transition-all duration-300 hover:scale-105" asChild>
-                      <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Github className="mr-2 h-4 w-4" />
-                        Code
-                      </Link>
-                    </Button>
-                    <Button size="sm" className="transition-all duration-300 hover:scale-105" asChild>
-                      <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-                        <ExternalLink className="mr-2 h-4 w-4" />
-                        Live Demo
-                      </Link>
-                    </Button>
+                        <Link href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                          <Github className="mr-2 h-4 w-4" />
+                          Code
+                        </Link>
+                      </Button>
+                      <Button size="sm" className="transition-all duration-300 hover:scale-105" asChild>
+                        <Link href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="mr-2 h-4 w-4" />
+                          Live Demo
+                        </Link>
+                      </Button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

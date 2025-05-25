@@ -76,13 +76,13 @@ export function Blog() {
           {featuredPosts.map((post) => (
             <Card
               key={post.id}
-              className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+              className="overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col h-full"
             >
               <div className="relative h-48 w-full">
                 <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
                 <Badge className="absolute top-4 left-4 bg-primary text-primary-foreground">Featured</Badge>
               </div>
-              <CardHeader>
+              <CardHeader className="flex-shrink-0">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                   <Calendar className="h-4 w-4" />
                   <span>{new Date(post.date).toLocaleDateString()}</span>
@@ -92,21 +92,24 @@ export function Blog() {
                 </CardTitle>
                 <CardDescription className="line-clamp-3">{post.excerpt}</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <Badge variant="secondary">{post.category}</Badge>
-                  {post.tags.slice(0, 2).map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
-                      {tag}
-                    </Badge>
-                  ))}
+              <CardContent className="flex flex-col flex-grow">
+                <div className="flex-grow"></div>
+                <div className="mt-auto space-y-4">
+                  <div className="flex flex-wrap gap-2">
+                    <Badge variant="secondary">{post.category}</Badge>
+                    {post.tags.slice(0, 2).map((tag) => (
+                      <Badge key={tag} variant="outline" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </div>
+                  <Button variant="ghost" className="p-0 h-auto font-semibold group w-fit" asChild>
+                    <Link href={`/blog/${post.id}`}>
+                      Read More
+                      <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </Button>
                 </div>
-                <Button variant="ghost" className="p-0 h-auto font-semibold group" asChild>
-                  <Link href={`/blog/${post.id}`}>
-                    Read More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </Button>
               </CardContent>
             </Card>
           ))}
