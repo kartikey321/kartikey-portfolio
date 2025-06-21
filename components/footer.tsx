@@ -9,6 +9,30 @@ import { Input } from "@/components/ui/input"
 import { useState } from "react"
 import { useToast } from "@/hooks/use-toast"
 
+// Helper function to send newsletter subscription
+async function sendNewsletterSubscription({ email, source }: { email: string; source: string }) {
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "https://backend.kartikeymahawar1234.workers.dev";
+  
+  const response = await fetch(`${backendUrl}/submit-newsletter`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      newsletterSubmission: {
+        email,
+        source,
+      }
+    })
+  });
+  
+  if (response.status === 409) {
+    throw new Error("Email already subscribed");
+  }
+  if (response.status === 200) {
+    return true;
+  }
+  throw new Error("Failed to subscribe to newsletter");
+}
+
 export function Footer() {
   const [email, setEmail] = useState("")
   const [isSubscribing, setIsSubscribing] = useState(false)
@@ -21,8 +45,10 @@ export function Footer() {
     setIsSubscribing(true)
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await sendNewsletterSubscription({
+        email,
+        source: "footer",
+      });
 
       toast({
         title: "Successfully subscribed!",
@@ -31,9 +57,14 @@ export function Footer() {
 
       setEmail("")
     } catch (error) {
+      let errorMessage = "Please try again later.";
+      if (error instanceof Error && error.message === "Email already subscribed") {
+        errorMessage = "This email is already subscribed to the newsletter.";
+      }
+      
       toast({
         title: "Subscription failed",
-        description: "Please try again later.",
+        description: errorMessage,
         variant: "destructive",
       })
     } finally {

@@ -13,6 +13,32 @@ import { useToast } from "@/hooks/use-toast"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
+import { set } from "date-fns"
+
+// Helper function to send newsletter subscription
+async function sendNewsletterSubscription({ email, name, source }: { email: string; name?: string; source: string }) {
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL || "https://backend.kartikeymahawar1234.workers.dev";
+  
+  const response = await fetch(`${backendUrl}/submit-newsletter`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      newsletterSubmission: {
+        email,
+        name,
+        source,
+      }
+    })
+  });
+  
+  if (response.status === 409) {
+    throw new Error("Email already subscribed");
+  }
+  if (response.status === 200) {
+    return true;
+  }
+  throw new Error("Failed to subscribe to newsletter");
+}
 
 export function Contact() {
   const { toast } = useToast()
@@ -23,9 +49,16 @@ export function Contact() {
     message: "",
     subscribeToNewsletter: false,
   })
-  const [newsletterFormData, setNewsletterFormData] = useState({
+  type NewsletterFormData = {
+    name?: string;
+    email: string;
+    source?:'newsletter'|'send-message'| 'footer'
+  };
+
+  const [newsletterFormData, setNewsletterFormData] = useState<NewsletterFormData>({
     name: "",
     email: "",
+    source: "newsletter",
   })
   const [isSubmittingMessage, setIsSubmittingMessage] = useState(false)
   const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false)
@@ -40,13 +73,26 @@ export function Contact() {
     try {
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1500))
-
-      // In a real app, you would send the data to your backend
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(messageFormData)
-      // });
+      
+      if(messageFormData.subscribeToNewsletter){
+        setNewsletterFormData((prev) => ({
+          ...prev,
+          email: messageFormData.email,
+          name: messageFormData.name,
+          source: "send-message",
+        }))
+        
+        try {
+          await sendNewsletterSubscription({
+            email: messageFormData.email,
+            name: messageFormData.name,
+            source: "send-message",
+          });
+        } catch (error) { 
+          console.error("Error subscribing to newsletter:", error)
+          // Don't fail the entire form if newsletter subscription fails
+        }
+      }
 
       setMessageFormStatus("success")
 
@@ -84,33 +130,37 @@ export function Contact() {
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmittingNewsletter(true)
+    
     setNewsletterFormStatus("idle")
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      await sendNewsletterSubscription({
+        email: newsletterFormData.email,
+        name: newsletterFormData.name,
+        source: "newsletter",
+      });
 
-      // In a real app, you would send the data to your newsletter service
-      // const response = await fetch('/api/newsletter', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(newsletterFormData)
-      // });
-
-      setNewsletterFormStatus("success")
+      setNewsletterFormStatus("success");
       toast({
         title: "Successfully subscribed!",
         description: "Welcome to my newsletter! You'll receive updates about my latest projects and insights.",
-      })
+      });
 
       // Reset form
-      setNewsletterFormData({ name: "", email: "" })
+      setNewsletterFormData({ name: "", email: "", source: "newsletter" })
+
     } catch (error) {
       console.error("Error subscribing to newsletter:", error)
       setNewsletterFormStatus("error")
+      
+      let errorMessage = "There was a problem subscribing you to the newsletter. Please try again.";
+      if (error instanceof Error && error.message === "Email already subscribed") {
+        errorMessage = "This email is already subscribed to the newsletter.";
+      }
+      
       toast({
         title: "Subscription failed",
-        description: "There was a problem subscribing you to the newsletter. Please try again.",
+        description: errorMessage,
         variant: "destructive",
       })
     } finally {
@@ -125,12 +175,12 @@ export function Contact() {
     }))
   }
 
-  const handleNewsletterFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewsletterFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }))
-  }
+  // const handleNewsletterFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   setNewsletterFormData((prev) => ({
+  //     ...prev,
+  //     [e.target.name]: e.target.value,
+  //   }))
+  // }
 
   const contactInfo = [
     {
@@ -308,6 +358,7 @@ export function Contact() {
 
                     <Button
                       type="submit"
+                      
                       className="w-full transition-all duration-300 hover:scale-105"
                       disabled={isSubmittingMessage}
                     >
@@ -391,12 +442,14 @@ export function Contact() {
                   <form onSubmit={handleNewsletterSubmit} className="space-y-4">
                     <div>
                       <Input
-                        name="name"
-                        placeholder="Your Name"
-                        value={newsletterFormData.name}
-                        onChange={handleNewsletterFormChange}
-                        required
-                        disabled={isSubmittingNewsletter}
+                      name="name"
+                      placeholder="Your Name"
+                      value={newsletterFormData.name}
+                      onChange={(e) => {
+                          setNewsletterFormData((prev)=>({...prev,name: e.target.value}));
+                      }}
+                      required
+                      disabled={isSubmittingNewsletter}
                       />
                     </div>
                     <div>
@@ -405,7 +458,7 @@ export function Contact() {
                         type="email"
                         placeholder="Your Email"
                         value={newsletterFormData.email}
-                        onChange={handleNewsletterFormChange}
+                        onChange={(e)=>setNewsletterFormData((prev)=>({...prev,email: e.target.value}))}
                         required
                         disabled={isSubmittingNewsletter}
                       />
