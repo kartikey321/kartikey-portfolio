@@ -70,6 +70,16 @@ npm run build
 npm start
 ```
 
+### Cloudflare Pages (GitHub Actions)
+1. Create a Cloudflare Pages project (for example `kartikey-portfolio`) in the dashboard. Skip the Git integration build command since CI will deploy for you.
+2. Add GitHub repository secrets:
+   - `CLOUDFLARE_ACCOUNT_ID` – your Cloudflare account ID
+   - `CLOUDFLARE_API_TOKEN` – API token with the **Cloudflare Pages:Edit** permission for your account
+   - `NEXT_PUBLIC_BACKEND_URL` – set to `https://backend.kartikeymahawar1234.workers.dev` (or your override)
+3. If your Pages project name differs, update `PAGES_PROJECT_NAME` inside `.github/workflows/cloudflare-pages.yml`.
+4. In Cloudflare Pages → Settings → Environment variables, add `NEXT_PUBLIC_BACKEND_URL` for both Production and Preview so runtime matches the build.
+5. The workflow builds with `npx @cloudflare/next-on-pages@1`, deploys production on pushes to `main`, and creates preview deploys on PRs from the same repo. Cloudflare assigns the preview URL automatically.
+
 ## Zoho Integration Setup
 
 ### Prerequisites

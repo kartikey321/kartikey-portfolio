@@ -64,15 +64,14 @@ export function Hero() {
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
               >
-                Fullstack Flutter Developer
+                Lead Flutter Fullstack Developer
               </h2>
               <p
                 className={`text-lg text-muted-foreground mb-12 max-w-2xl mx-auto lg:mx-0 transition-all duration-1000 delay-500 ease-out ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
               >
-                I create beautiful, performant mobile and web applications using Flutter, with expertise in backend
-                development and modern web technologies.
+                3+ years building high-performance cross-platform applications serving 10K+ daily users. Specialist in concurrent Flutter architectures, real-time pipelines (gRPC, WebSockets), and event-driven microservices at Cladbe.
               </p>
 
               <div

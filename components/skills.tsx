@@ -5,27 +5,27 @@ export function Skills() {
   const skillCategories = [
     {
       title: "Programming Languages",
-      skills: ["C++", "C", "JavaScript", "TypeScript", "Dart", "Kotlin", "Java", "Python", "C#"],
+      skills: ["Dart", "TypeScript", "JavaScript", "Kotlin", "Java", "C++", "Python", "C"],
     },
     {
-      title: "Frameworks & Libraries",
-      skills: ["Flutter", "React Native", "React.js", "HTML", "CSS", "DotNet Maui", "Docker", "Node.js", "gRPC"],
+      title: "Flutter & Dart",
+      skills: ["Flutter", "BLoC", "Riverpod", "Provider", "Dart Isolates", "Offline-first", "Fastlane"],
     },
     {
-      title: "Databases",
-      skills: ["SQL", "MongoDB", "Firebase", "Neo4j", "Supabase", "PostgreSQL"],
+      title: "Backend & Real-time",
+      skills: ["gRPC", "WebSockets", "REST", "Kafka CDC", "Node.js", "TypeScript", "Event-driven", "S3"],
     },
     {
-      title: "Core Skills",
-      skills: ["Data Structures", "Algorithms", "Object Oriented Design", "Operating Systems", "Database Management"],
+      title: "Databases & Infrastructure",
+      skills: ["PostgreSQL", "MongoDB", "Neo4j", "Redis", "KeyDB", "Typesense", "Docker", "CI/CD", "Nginx"],
+    },
+    {
+      title: "Web Frameworks",
+      skills: ["React Native", "React.js", "HTML", "CSS", "Next.js"],
     },
     {
       title: "Cloud & DevOps",
-      skills: ["AWS", "Google Cloud", "Docker", "CI/CD", "Git", "Vercel"],
-    },
-    {
-      title: "Tools & Others",
-      skills: ["VS Code", "Android Studio", "Figma", "Postman", "Jira", "Agile"],
+      skills: ["AWS", "Google Cloud", "GitHub Actions", "Firebase", "Cloudflare R2", "k6", "Git"],
     },
   ]
 

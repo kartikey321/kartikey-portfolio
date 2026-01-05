@@ -4,6 +4,11 @@ import { Trophy } from "lucide-react"
 export function Awards() {
   const awards = [
     {
+      title: "GrabHack 2025",
+      position: "2nd Prize Winner - Backend Track",
+      date: "July 2025",
+    },
+    {
       title: "Nasscom Academic Grand Challenge (Wells Fargo Hackathon)",
       position: "1st Prize Winner",
       date: "February 2023",
@@ -15,7 +20,7 @@ export function Awards() {
     },
     {
       title: "Bajaj Finserv Hackrx 3.0",
-      position: "3rd Prize Winner",
+      position: "Third Prize Winner",
       date: "June 2022",
     },
     {

@@ -24,58 +24,58 @@ export function Projects() {
 
   const projects = [
     {
+      title: "Fletch - Express for Dart",
+      description:
+        "Production HTTP framework with radix tree router, middleware pipeline, SSE support, CORS, rate-limiting, and hot reload. Published on pub.dev with full documentation.",
+      image: "/placeholder.svg?height=200&width=300",
+      technologies: ["Dart", "HTTP", "GetIt", "Middleware", "Hot Reload"],
+      githubUrl: "https://github.com/kartikey321/fletch",
+      liveUrl: "https://pub.dev/packages/fletch",
+    },
+    {
+      title: "Knex Dart - SQL Query Builder",
+      description:
+        "Port of Knex.js with 100% API parity. Type-safe SQL query builder with 268 passing tests covering SELECT, INSERT, UPDATE, DELETE, and aggregate functions.",
+      image: "/placeholder.svg?height=200&width=300",
+      technologies: ["Dart", "SQL", "PostgreSQL", "Query Builder"],
+      githubUrl: "https://github.com/kartikey321/knex-dart",
+      liveUrl: "https://pub.dev/packages/knex_dart",
+    },
+    {
       title: "Mongo Chat Dart",
       description:
-        "A Dart package for implementing chat functionality with features like user management, direct messaging, group chats, read receipts, and real-time updates.",
+        "Real-time chat SDK for Dart with user management, direct messaging, group chats, read receipts, and WebSocket streams for high-performance communication.",
       image: "/placeholder.svg?height=200&width=300",
-      technologies: ["Dart", "MongoDB", "Real-time", "Package"],
-      githubUrl: "https://github.com/kartikey321",
-      liveUrl: "https://example.com",
+      technologies: ["Dart", "MongoDB", "WebSockets", "Real-time"],
+      githubUrl: "https://github.com/kartikey321/mongo-chat-dart",
+      liveUrl: "https://github.com/kartikey321/mongo-chat-dart",
     },
     {
-      title: "Educazy",
+      title: "Concurrent File Upload Orchestrator",
       description:
-        "An inclusive educational platform for specially-abled students with features like voice-controlled bot, online classes with sign language to text conversion, and text to Braille.",
+        "High-performance upload system using Dart isolates achieving 37% faster uploads, 50% memory reduction, and CPU usage from 200% to 50% with lazy chunk loading and Merkle tree deduplication.",
       image: "/placeholder.svg?height=200&width=300",
-      technologies: ["Flutter", "React", "TensorFlow", "Mediapipe"],
-      githubUrl: "https://github.com/kartikey321",
-      liveUrl: "https://example.com",
+      technologies: ["Dart", "Dart Isolates", "S3", "Merkle Trees", "Performance"],
+      githubUrl: "#",
+      liveUrl: "#",
     },
     {
-      title: "DotPay",
+      title: "Country Data Kit",
       description:
-        "A neobank platform enabling users to create custom labels for transactions, invest in community projects, and earn ERC20 tokens as participation incentives.",
+        "High-performance Flutter package for country, state, and city data using protobuf for efficient serialization and querying. Optimized for fast lookups and minimal memory footprint.",
+      image: "/placeholder.svg?height=200&width=300",
+      technologies: ["Dart", "Flutter", "Protobuf", "Data Management"],
+      githubUrl: "https://github.com/kartikey321/country_data_kit",
+      liveUrl: "https://github.com/kartikey321/country_data_kit",
+    },
+    {
+      title: "DotPay - Neo-Bank Platform",
+      description:
+        "Token-based neo-bank enabling users to label transactions, invest in community projects, and earn ERC20 token incentives for participation.",
       image: "/placeholder.svg?height=200&width=300",
       technologies: ["Flutter", "API Integration", "Blockchain", "ERC20"],
-      githubUrl: "https://github.com/kartikey321",
-      liveUrl: "https://example.com",
-    },
-    {
-      title: "Real Estate Management Solution",
-      description:
-        "A B2B real estate management solution with cloud telephony, file caching system, and advanced search capabilities using Typesense.",
-      image: "/placeholder.svg?height=200&width=300",
-      technologies: ["Flutter", "Express.js", "TypeScript", "Neo4j"],
-      githubUrl: "https://github.com/kartikey321",
-      liveUrl: "https://example.com",
-    },
-    {
-      title: "Cross-Platform Application",
-      description:
-        "A cross-platform application for macOS, iOS, Android, Windows, and web with optimized data flow using gRPC and WebSocket technologies.",
-      image: "/placeholder.svg?height=200&width=300",
-      technologies: ["Flutter", "gRPC", "WebSocket", "Cross-platform"],
-      githubUrl: "https://github.com/kartikey321",
-      liveUrl: "https://example.com",
-    },
-    {
-      title: "Gen-y Club App",
-      description:
-        "Led the development of the Gen-y Club SRM app as App Developer Lead, mentoring and developing 5 cross-platform applications.",
-      image: "/placeholder.svg?height=200&width=300",
-      technologies: ["Flutter", "Cross-platform", "Mentorship", "Team Lead"],
-      githubUrl: "https://github.com/kartikey321",
-      liveUrl: "https://example.com",
+      githubUrl: "#",
+      liveUrl: "#",
     },
   ]
 

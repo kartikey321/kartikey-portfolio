@@ -85,7 +85,13 @@ export function Blog() {
               <CardHeader className="flex-shrink-0">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
                   <Calendar className="h-4 w-4" />
-                  <span>{new Date(post.date).toLocaleDateString()}</span>
+                  <span suppressHydrationWarning>
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </span>
                 </div>
                 <CardTitle className="text-xl hover:text-primary transition-colors">
                   <Link href={`/blog/${post.id}`}>{post.title}</Link>

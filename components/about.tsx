@@ -40,19 +40,13 @@ export function About() {
           <div>
             <h3 className="text-2xl font-semibold mb-6">My Journey</h3>
             <p className="text-muted-foreground mb-4">
-              Full-stack developer with over a year of experience in designing and building mobile, web, and desktop
-              applications. Skilled in creating scalable cross-platform solutions using Flutter, React Native, and
-              React.js.
+              Lead Flutter Fullstack Developer with <strong>3+ years</strong> of experience building high-performance cross-platform applications serving <strong>10K+ daily users</strong>. Specialized in architecting concurrent Flutter frontends, real-time pipelines (gRPC, WebSockets), and distributed backend systems.
             </p>
             <p className="text-muted-foreground mb-4">
-              Proficient in backend development with Node.js, Express.js, TypeScript, and gRPC, and experienced in
-              managing databases like MongoDB, Firebase, Neo4j, and SQL. Passionate about delivering efficient,
-              cloud-based systems with real-time updates and well-architected designs.
+              Architected concurrent file upload system achieving <strong>37% faster</strong> performance and <strong>50% memory reduction</strong> using Dart isolates. Expert in offline-first BLoC/Riverpod state management, event-driven microservices, and Graph-Based Access Control with Neo4j.
             </p>
             <p className="text-muted-foreground">
-              Currently working as a Flutter Lead Developer at Amiltus, where I spearhead the development of B2B real
-              estate management solutions and implement advanced technologies like Graph-Based Access Control systems
-              and gRPC.
+              Currently working as <strong>Lead Flutter Fullstack Developer</strong> at <strong>Cladbe</strong>, where I lead engineering teams building multi-tenant SaaS platforms across Web, iOS, Android, macOS, and Windows. Open-source contributor with published packages on pub.dev including Fletch (Express for Dart) and Knex Dart (SQL query builder).
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
